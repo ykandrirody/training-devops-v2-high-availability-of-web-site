@@ -26,18 +26,36 @@ script:
     - docker-compose version
 
 script:
-  # Build image
   - ls -lah
-  - docker build -t ykandrirody/docker-netmvc-a docker-netmvc-a/.
-  # Test for single database
-  - docker run --name testwebserver -d -p 9090:80 ykandrirody/docker-netmvc-a
+  
+  # Build images
+  - docker-compose -f ./training-devops-v2-high-availability-of-web-site/docker-compose-lb.yml build
+  - docker-compose -f ./training-devops-v2-high-availability-of-web-site/docker-compose-a.yml build
+  - docker-compose -f ./training-devops-v2-high-availability-of-web-site/docker-compose-b.yml build
+
+  # Start the load balancer
+  - docker-compose -f ./training-devops-v2-high-availability-of-web-site/docker-compose-lb.yml up -d
+  - curl http://localhost:5050/
+  - curl http://localhost:5050/ | grep -q '404'
+  
+  # Start the server A
+  - docker-compose -f ./training-devops-v2-high-availability-of-web-site/docker-compose-a.yml up -d
+
+  # Start the server B
+  - docker-compose -f ./training-devops-v2-high-availability-of-web-site/docker-compose-b.yml up -d
+
+  # See started containers
   - docker ps -a
-  - docker logs testwebserver > stdout.log 2>stderr.log
-  - sleep 5
-  - docker exec testwebserver ls -lah
-  - curl http://127.0.0.1:9090/
-  - docker exec testwebserver ls -lah
-  - ls -lah
-  - cat stdout.log
-  - cat stderr.log
-  - curl http://127.0.0.1:9090/ | grep -q 'Web Server A'
+
+  # Wait to container to start
+  - sleep 10
+  
+  # See the result of the web servers 
+  - curl http://localhost:5011/
+  - curl http://localhost:5012/
+  - curl http://localhost:5050/
+
+  # Check the result of the web servers 
+  - curl http://localhost:5011/ | grep -q 'Web Server A'
+  - curl http://localhost:5012/ | grep -q 'Web Server B'
+  - curl http://localhost:5050/ | grep -q 'Web Server '

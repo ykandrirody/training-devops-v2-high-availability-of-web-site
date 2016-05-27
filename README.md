@@ -41,7 +41,7 @@ Frontend load balancer : error 404
 Web server A : Unreachable
 Web server B : Unreachable
 
-## 2.2 - Start the load balancer :
+## 2.2 - Start the server A :
 
 ```
 docker-compose -f ./training-devops-v2-high-availability-of-web-site/docker-compose-a.yml up -d
@@ -53,7 +53,7 @@ Frontend load balancer : Server A
 Web server A : Reachable
 Web server B : Unreachable
 
-## 2.2 - Start the load balancer :
+## 2.2 - Start the server B :
 
 ```
 docker-compose -f ./training-devops-v2-high-availability-of-web-site/docker-compose-b.yml up -d
@@ -65,7 +65,7 @@ Frontend load balancer : Server A OR Server B
 Web server A : Reachable
 Web server B : Reachable
 
-## 2.2 - Start the load balancer :
+## 2.2 - Stop the server A :
 
 ```
 docker-compose -f ./training-devops-v2-high-availability-of-web-site/docker-compose-a.yml kill
