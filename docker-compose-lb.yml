@@ -1,0 +1,13 @@
+version: '2'
+
+services:
+    theloadbalancer:
+        image: traefik:v1.0.0-beta.704
+        container_name: theloadbalancer
+        command: --web --docker --docker.domain=docker.localhost --logLevel=DEBUG
+        ports:
+        - 5050:80
+        - 5080:8080
+        volumes:
+        - /var/run/docker.sock:/var/run/docker.sock
+        - /dev/null:/traefik.toml

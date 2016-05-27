@@ -1,0 +1,27 @@
+sudo: required
+
+services:
+  - docker
+
+before_install:
+  - pip install --user codecov
+
+script:
+  # Build image
+  - ls -lah
+  - docker build -t ykandrirody/docker-netmvc-a .
+  # Test for single database
+  - docker run --name testwebserver -d -p 9090:80 ykandrirody/docker-netmvc-a
+  - docker ps -a
+  - docker logs testwebserver > stdout.log 2>stderr.log
+  - sleep 5
+  - docker exec testwebserver ls -lah
+  - curl http://127.0.0.1:9090/
+  - docker exec testwebserver ls -lah
+  - ls -lah
+  - cat stdout.log
+  - cat stderr.log
+  - curl http://127.0.0.1:9090/ | grep -q 'Web Server A'
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)

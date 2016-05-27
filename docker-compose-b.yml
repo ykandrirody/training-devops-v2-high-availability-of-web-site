@@ -1,0 +1,11 @@
+version: '2'
+
+services:
+    thewebserver.b:
+        build: docker-netmvc-b/.
+        container_name: thewebserver.b
+        ports:
+        - 5012:80
+        labels:
+        - "traefik.backend=localhost"
+        - "traefik.frontend.rule=Host:localhost"
