@@ -1,5 +1,7 @@
 # DevOps Training - High availability of web site - Practical / Usage - using Docker compose
 
+[![Build Status](https://travis-ci.org/ykandrirody/training-devops-v2-high-availability-of-web-site.svg?branch=master)](https://travis-ci.org/ykandrirody/training-devops-v2-high-availability-of-web-site)
+
 # 1 - Preparation (you can be offline after this step)
 
 ## 1.1 - Clone the repository locally
