@@ -29,7 +29,7 @@ script:
   - ls -lah
   
   # Build images
-  - docker-compose -f ./training-devops-v2-high-availability-of-web-site/docker-compose-lb.yml build
+  - docker-compose -f training-devops-v2-high-availability-of-web-site/docker-compose-lb.yml build
   - docker-compose -f ./training-devops-v2-high-availability-of-web-site/docker-compose-a.yml build
   - docker-compose -f ./training-devops-v2-high-availability-of-web-site/docker-compose-b.yml build
 
