@@ -29,20 +29,20 @@ script:
   - ls -lah
   
   # Build images
-  - docker-compose -f $BUILDENV/training-devops-v2-high-availability-of-web-site/docker-compose-lb.yml build
-  - docker-compose -f ./training-devops-v2-high-availability-of-web-site/docker-compose-a.yml build
-  - docker-compose -f ./training-devops-v2-high-availability-of-web-site/docker-compose-b.yml build
+  - docker-compose -f ./docker-compose-lb.yml build
+  - docker-compose -f ./docker-compose-a.yml build
+  - docker-compose -f ./docker-compose-b.yml build
 
   # Start the load balancer
-  - docker-compose -f ./training-devops-v2-high-availability-of-web-site/docker-compose-lb.yml up -d
+  - docker-compose -f ./docker-compose-lb.yml up -d
   - curl http://localhost:5050/
   - curl http://localhost:5050/ | grep -q '404'
   
   # Start the server A
-  - docker-compose -f ./training-devops-v2-high-availability-of-web-site/docker-compose-a.yml up -d
+  - docker-compose -f ./docker-compose-a.yml up -d
 
   # Start the server B
-  - docker-compose -f ./training-devops-v2-high-availability-of-web-site/docker-compose-b.yml up -d
+  - docker-compose -f ./docker-compose-b.yml up -d
 
   # See started containers
   - docker ps -a
