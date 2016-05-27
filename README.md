@@ -1,6 +1,6 @@
 # DevOps Training - High availability of web site - Practical / Usage - using Docker compose
 
-# 1 - Preparation to be offline
+# 1 - Preparation (you can be offline after this step)
 
 ## 1.1 - Clone the repository locally
 ```
