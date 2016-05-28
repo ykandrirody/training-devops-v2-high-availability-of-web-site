@@ -36,12 +36,28 @@ script:
   # Start the load balancer
   - docker-compose -f ./docker-compose-lb.yml up -d
   - curl http://localhost:5050/
-  - curl http://localhost:5050/ | grep -q '404'
+  - curl http://localhost:5050/ | grep -q '404 page not found'
   
   # Start the server A
   - docker-compose -f ./docker-compose-a.yml up -d
 
-  # Start the server B
+  # See started containers
+  - docker ps -a
+
+  # Wait to container to start
+  - sleep 10
+  
+  # See the result of the web servers 
+  - curl http://localhost:5011/
+  - curl http://localhost:5050/
+
+  # Check the result of the web servers 
+  - curl http://localhost:5011/ | grep -q 'Web Server A'
+  - curl http://localhost:5050/ | grep -q 'Web Server A'
+
+
+
+  ## Start the server B
   - docker-compose -f ./docker-compose-b.yml up -d
 
   # See started containers
@@ -59,3 +75,22 @@ script:
   - curl http://localhost:5011/ | grep -q 'Web Server A'
   - curl http://localhost:5012/ | grep -q 'Web Server B'
   - curl http://localhost:5050/ | grep -q 'Web Server '
+
+
+
+  # Stop the server A
+  - docker-compose -f ./docker-compose-a.yml kill
+
+  # See started containers
+  - docker ps -a
+
+  # Wait to container to start
+  - sleep 10
+  
+  # See the result of the web servers 
+  - curl http://localhost:5012/
+  - curl http://localhost:5050/
+
+  # Check the result of the web servers 
+  - curl http://localhost:5012/ | grep -q 'Web Server B'
+  - curl http://localhost:5050/ | grep -q 'Web Server B'
