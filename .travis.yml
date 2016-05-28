@@ -1,7 +1,7 @@
 sudo: required
 
 services:
-  - docker
+    - docker
 
 env:  
     global:
@@ -25,77 +25,76 @@ script:
     - docker version
     - docker-compose version
 
-script:
-  - ls -lah
-  
-  # Build images
-  - docker-compose -f ./docker-compose-lb.yml build
-  - docker-compose -f ./docker-compose-a.yml build
-  - docker-compose -f ./docker-compose-b.yml build
+    - ls -lah
 
-  # Start the load balancer
-  - docker-compose -f ./docker-compose-lb.yml up -d
-  - curl http://localhost:5050/
-  - curl http://localhost:5050/ | grep -q '404 page not found'
-  
-  # Start the server A
-  - docker-compose -f ./docker-compose-a.yml up -d
+    # Build images
+    - docker-compose -f ./docker-compose-lb.yml build
+    - docker-compose -f ./docker-compose-a.yml build
+    - docker-compose -f ./docker-compose-b.yml build
 
-  # See started containers
-  - docker ps -a
+    # Start the load balancer
+    - docker-compose -f ./docker-compose-lb.yml up -d
+    - curl http://localhost:5050/
+    - curl http://localhost:5050/ | grep -q '404 page not found'
 
-  # Wait to container to start
-  - sleep 10
-  
-  # See the result of the web servers 
-  - curl http://localhost:5011/
-  - curl http://localhost:5050/
+    # Start the server A
+    - docker-compose -f ./docker-compose-a.yml up -d
 
-  # Check the result of the web servers 
-  - curl http://localhost:5011/ | grep -q 'Web Server A'
-  - curl http://localhost:5050/ | grep -q 'Web Server A'
+    # See started containers
+    - docker ps -a
 
+    # Wait to container to start
+    - sleep 10
 
+    # See the result of the web servers 
+    - curl http://localhost:5011/
+    - curl http://localhost:5050/
 
-  ## Start the server B
-  - docker-compose -f ./docker-compose-b.yml up -d
-
-  # See started containers
-  - docker ps -a
-
-  # Wait to container to start
-  - sleep 10
-  
-  # See the result of the web servers 
-  - echo See the result of the web servers 
-  - curl http://localhost:5011/
-  - curl http://localhost:5012/
-  - curl http://localhost:5050/
-  - curl http://localhost:5050/
-  - curl http://localhost:5050/
-  - curl http://localhost:5050/
-  - curl http://localhost:5050/
-
-  # Check the result of the web servers 
-  - curl http://localhost:5011/ | grep -q 'Web Server A'
-  - curl http://localhost:5012/ | grep -q 'Web Server B'
-  - curl http://localhost:5050/ | grep -q 'Web Server '
+    # Check the result of the web servers 
+    - curl http://localhost:5011/ | grep -q 'Web Server A'
+    - curl http://localhost:5050/ | grep -q 'Web Server A'
 
 
 
-  # Stop the server A
-  - docker-compose -f ./docker-compose-a.yml kill
+    ## Start the server B
+    - docker-compose -f ./docker-compose-b.yml up -d
 
-  # See started containers
-  - docker ps -a
+    # See started containers
+    - docker ps -a
 
-  # Wait to container to start
-  - sleep 10
-  
-  # See the result of the web servers 
-  - curl http://localhost:5012/
-  - curl http://localhost:5050/
+    # Wait to container to start
+    - sleep 10
 
-  # Check the result of the web servers 
-  - curl http://localhost:5012/ | grep -q 'Web Server B'
-  - curl http://localhost:5050/ | grep -q 'Web Server B'
+    # See the result of the web servers 
+    - echo See the result of the web servers 
+    - curl http://localhost:5011/
+    - curl http://localhost:5012/
+    - curl http://localhost:5050/
+    - curl http://localhost:5050/
+    - curl http://localhost:5050/
+    - curl http://localhost:5050/
+    - curl http://localhost:5050/
+
+    # Check the result of the web servers 
+    - curl http://localhost:5011/ | grep -q 'Web Server A'
+    - curl http://localhost:5012/ | grep -q 'Web Server B'
+    - curl http://localhost:5050/ | grep -q 'Web Server '
+
+
+
+    # Stop the server A
+    - docker-compose -f ./docker-compose-a.yml kill
+
+    # See started containers
+    - docker ps -a
+
+    # Wait to container to start
+    - sleep 10
+
+    # See the result of the web servers 
+    - curl http://localhost:5012/
+    - curl http://localhost:5050/
+
+    # Check the result of the web servers 
+    - curl http://localhost:5012/ | grep -q 'Web Server B'
+    - curl http://localhost:5050/ | grep -q 'Web Server B'
