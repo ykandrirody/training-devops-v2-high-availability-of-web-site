@@ -67,8 +67,13 @@ script:
   - sleep 10
   
   # See the result of the web servers 
+  - echo See the result of the web servers 
   - curl http://localhost:5011/
   - curl http://localhost:5012/
+  - curl http://localhost:5050/
+  - curl http://localhost:5050/
+  - curl http://localhost:5050/
+  - curl http://localhost:5050/
   - curl http://localhost:5050/
 
   # Check the result of the web servers 
