@@ -2,6 +2,9 @@
 
 [![Build Status](https://travis-ci.org/ykandrirody/training-devops-v2-high-availability-of-web-site.svg?branch=master)](https://travis-ci.org/ykandrirody/training-devops-v2-high-availability-of-web-site)
 
+[Get the PDF of this README](https://gitprint.com/ykandrirody/training-devops-v2-high-availability-of-web-site/blob/master/README.md)
+
+
 # 1 - Preparation (you can be offline after this step)
 
 ## 1.1 - Clone the repository locally
@@ -37,8 +40,11 @@ docker-compose -f ./training-devops-v2-high-availability-of-web-site/docker-comp
 
 ## 2.3 - Verify :
 Admin load balancer : empty
+
 Frontend load balancer : error 404
+
 Web server A : Unreachable
+
 Web server B : Unreachable
 
 ## 2.2 - Start the server A :
@@ -49,8 +55,11 @@ docker-compose -f ./training-devops-v2-high-availability-of-web-site/docker-comp
 
 ## 2.3 - Verify :
 Admin load balancer : Server A
+
 Frontend load balancer : Server A
+
 Web server A : Reachable
+
 Web server B : Unreachable
 
 ## 2.2 - Start the server B :
@@ -61,8 +70,11 @@ docker-compose -f ./training-devops-v2-high-availability-of-web-site/docker-comp
 
 ## 2.3 - Verify :
 Admin load balancer : Server A, Server B
+
 Frontend load balancer : Server A OR Server B
+
 Web server A : Reachable
+
 Web server B : Reachable
 
 ## 2.2 - Stop the server A :
@@ -73,8 +85,11 @@ docker-compose -f ./training-devops-v2-high-availability-of-web-site/docker-comp
 
 ## 2.3 - Verify :
 Admin load balancer : Server B
+
 Frontend load balancer : Server B
+
 Web server A : Unreachable
+
 Web server B : Reachable
 
 
