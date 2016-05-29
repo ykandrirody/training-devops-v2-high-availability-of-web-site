@@ -47,13 +47,13 @@ Web server A : Unreachable
 
 Web server B : Unreachable
 
-## 2.2 - Start the server A :
+## 2.4 - Start the server A :
 
 ```
 docker-compose -f ./training-devops-v2-high-availability-of-web-site/docker-compose-a.yml up -d
 ```
 
-## 2.3 - Verify :
+## 2.5 - Verify :
 Admin load balancer : Server A
 
 Frontend load balancer : Server A
@@ -62,13 +62,13 @@ Web server A : Reachable
 
 Web server B : Unreachable
 
-## 2.2 - Start the server B :
+## 2.6 - Start the server B :
 
 ```
 docker-compose -f ./training-devops-v2-high-availability-of-web-site/docker-compose-b.yml up -d
 ```
 
-## 2.3 - Verify :
+## 2.7 - Verify :
 Admin load balancer : Server A, Server B
 
 Frontend load balancer : Server A OR Server B
@@ -77,13 +77,13 @@ Web server A : Reachable
 
 Web server B : Reachable
 
-## 2.2 - Stop the server A :
+## 2.8 - Stop the server A :
 
 ```
 docker-compose -f ./training-devops-v2-high-availability-of-web-site/docker-compose-a.yml kill
 ```
 
-## 2.3 - Verify :
+## 2.9 - Verify :
 Admin load balancer : Server B
 
 Frontend load balancer : Server B
