@@ -12,7 +12,7 @@
 git clone https://github.com/ykandrirody/training-devops-v2-high-availability-of-web-site.git
 ```
 
-## 1.2 - Download dependencies
+## 1.2 - Pull and build the Docker containers
 ```
 docker-compose -f ./training-devops-v2-high-availability-of-web-site/docker-compose-lb.yml pull
 docker-compose -f ./training-devops-v2-high-availability-of-web-site/docker-compose-lb.yml build
@@ -24,7 +24,7 @@ docker-compose -f ./training-devops-v2-high-availability-of-web-site/docker-comp
 
 # 2 - Start the practical
 
-## 2.1 - All urls :
+## 2.1 - Open this urls :
 ```
 http://localhost:5011/   Web server A.
 http://localhost:5012/   Web server B.
@@ -46,6 +46,7 @@ Frontend load balancer : error 404
 Web server A : Unreachable
 
 Web server B : Unreachable
+
 
 ## 2.4 - Start the server A :
 
